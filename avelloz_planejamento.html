@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planejamento — Avelloz Motos Queimadas</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #1a1aff;
+    --azul-esc: #0a0a99;
+    --laranja: #ff6200;
+    --branco: #ffffff;
+    --cinza-claro: #f0f2ff;
+    --cinza-card: #e8ebff;
+    --texto: #0d0d2b;
+    --sombra: rgba(26,26,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: #f0f2ff;
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0a0aaa 0%, #1a1aff 50%, #2222ff 100%);
+    padding: 36px 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,98,0,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 20%;
+    width: 400px; height: 200px;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-box {
+    background: var(--azul-esc);
+    border-radius: 16px;
+    padding: 14px 20px;
+    border: 2px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+  .logo-box img {
+    width: 140px;
+    display: block;
+  }
+  .header-text h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+  .header-text h1 span { color: var(--laranja); }
+  .header-text p {
+    color: rgba(255,255,255,0.72);
+    font-size: 1rem;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .badge-inauguracao {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--laranja);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+  .badge-inauguracao::before { content: '🏍️'; font-size: 1rem; }
+
+  /* MAIN */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--texto);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-title .pill {
+    background: var(--azul);
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .section-title .pill.laranja { background: var(--laranja); }
+
+  /* REFERENCIAS GRID */
+  .refs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin-bottom: 52px;
+  }
+
+  .ref-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1.5px solid #d0d5ff;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--texto);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px var(--sombra);
+    position: relative;
+    overflow: hidden;
+  }
+  .ref-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--azul);
+    transition: width 0.2s ease;
+  }
+  .ref-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px var(--sombra);
+    border-color: var(--azul);
+  }
+  .ref-card:hover::before { width: 6px; background: var(--laranja); }
+
+  .ref-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--azul);
+    opacity: 0.2;
+    line-height: 1;
+    min-width: 36px;
+  }
+  .ref-info strong {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    display: block;
+    color: var(--texto);
+  }
+  .ref-info span {
+    font-size: 0.78rem;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  .ref-info span::before { content: '↗'; font-size: 0.85rem; color: var(--azul); }
+  .ref-card .play-icon {
+    margin-left: auto;
+    width: 36px; height: 36px;
+    background: var(--azul);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .ref-card:hover .play-icon { background: var(--laranja); }
+
+  /* CONTEUDOS */
+  .conteudos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media(max-width: 700px) {
+    .conteudos-grid { grid-template-columns: 1fr; }
+    .refs-grid { grid-template-columns: 1fr; }
+    .header-inner { flex-direction: column; text-align: center; }
+    .header-text h1 { font-size: 1.8rem; }
+  }
+
+  .content-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1.5px solid #d0d5ff;
+    padding: 22px 22px 20px;
+    box-shadow: 0 2px 10px var(--sombra);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .content-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px var(--sombra);
+  }
+  .content-card .card-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--azul);
+    opacity: 0.07;
+    position: absolute;
+    top: 8px; right: 14px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .card-icon.blue { background: rgba(26,26,255,0.08); }
+  .card-icon.orange { background: rgba(255,98,0,0.1); }
+
+  .card-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--texto);
+    line-height: 1.3;
+  }
+  .card-type {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .card-type.reels { background: rgba(255,98,0,0.12); color: var(--laranja); }
+  .card-type.feed { background: rgba(26,26,255,0.1); color: var(--azul); }
+  .card-type.stories { background: rgba(0,180,100,0.1); color: #00a060; }
+  .card-type.trafego { background: rgba(150,0,200,0.1); color: #9000c8; }
+
+  .card-body p {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 0.72rem;
+    background: var(--cinza-card);
+    color: var(--azul);
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .tag.laranja { background: rgba(255,98,0,0.08); color: var(--laranja); }
+
+  /* DIVIDER */
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--azul), var(--laranja), transparent);
+    border-radius: 2px;
+    margin: 40px 0 32px;
+    opacity: 0.25;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 28px;
+    font-size: 0.8rem;
+    color: #aaa;
+    border-top: 1px solid #dde0ff;
+    margin-top: 20px;
+  }
+  .footer strong { color: var(--azul); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-box" style="display:none">
+      <img src="data:image/jpeg;base64,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" alt="Avelloz Motos">
+    </div>
+    <div class="header-text">
+      <h1>Planejamento <span>Avelloz</span><br>Motos Queimadas</h1>
+      <p>Referências de vídeos + Planejamento de conteúdo Instagram</p>
+      <div class="badge-inauguracao">Inauguração: 18 de Abril de 2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- REFERENCIAS -->
+  <div class="section-title">
+    🎬 Referências de Vídeo
+    <span class="pill">17 anúncios</span>
+  </div>
+
+  <div class="refs-grid">
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1286275036688596" target="_blank">
+      <div class="ref-num">01</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 1</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1227027179569869" target="_blank">
+      <div class="ref-num">02</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 2</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=2055332445235358" target="_blank">
+      <div class="ref-num">03</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 3</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1968216713734068" target="_blank">
+      <div class="ref-num">04</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 4</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1566685607750639" target="_blank">
+      <div class="ref-num">05</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 5</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1574518080325514" target="_blank">
+      <div class="ref-num">06</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 6</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1192535689356890" target="_blank">
+      <div class="ref-num">07</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 7</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1269069445328976" target="_blank">
+      <div class="ref-num">08</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 8</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=26312638458356467" target="_blank">
+      <div class="ref-num">09</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 9</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=26104569122482529" target="_blank">
+      <div class="ref-num">10</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 10</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=4259521210963808" target="_blank">
+      <div class="ref-num">11</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 11</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=969810185710118" target="_blank">
+      <div class="ref-num">12</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 12</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=937419372137861" target="_blank">
+      <div class="ref-num">13</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 13</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=26126997930261481" target="_blank">
+      <div class="ref-num">14</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 14</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1738344497587426" target="_blank">
+      <div class="ref-num">15</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 15</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=1379561697542298" target="_blank">
+      <div class="ref-num">16</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 16</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+    <a class="ref-card" href="https://www.facebook.com/ads/library/?id=937969539403208" target="_blank">
+      <div class="ref-num">17</div>
+      <div class="ref-info">
+        <strong>Vídeo Gravação 17</strong>
+        <span>Ver na Biblioteca de Anúncios</span>
+      </div>
+      <div class="play-icon">▶</div>
+    </a>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONTEUDOS INSTAGRAM -->
+  <div class="section-title">
+    📱 Planejamento Instagram — 15 Conteúdos
+    <span class="pill laranja">lançamento</span>
+  </div>
+
+  <div class="conteudos-grid">
+
+    <!-- 1 -->
+    <div class="content-card">
+      <div class="card-num">01</div>
+      <div class="card-header">
+        <div class="card-icon blue">🏍️</div>
+        <div>
+          <span class="card-type reels">Reels</span>
+          <div class="card-title">Apresentação da Loja — "A Avelloz chegou em Queimadas"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Vídeo de inauguração mostrando a fachada, interior, equipe e as motos em exposição. Narração empolgada, cortes rápidos, trilha animada. Publicar no dia 18/04.</p>
+        <div class="card-tags">
+          <span class="tag">inauguração</span>
+          <span class="tag">brand</span>
+          <span class="tag laranja">alto alcance</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="content-card">
+      <div class="card-num">02</div>
+      <div class="card-header">
+        <div class="card-icon orange">🎬</div>
+        <div>
+          <span class="card-type trafego">Anúncio</span>
+          <div class="card-title">"Qual moto cabe no seu bolso?" — Oferta com entrada + parcela</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Vendedor fala direto para câmera: "Você sabia que dá pra sair de moto hoje com R$X de entrada e R$X por mês?" Mostrar a moto, chamar pro WhatsApp. Ideal para tráfego pago.</p>
+        <div class="card-tags">
+          <span class="tag">conversão</span>
+          <span class="tag laranja">tráfego pago</span>
+          <span class="tag">oferta</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="content-card">
+      <div class="card-num">03</div>
+      <div class="card-header">
+        <div class="card-icon blue">📸</div>
+        <div>
+          <span class="card-type feed">Feed</span>
+          <div class="card-title">Carrossel: "Conheça as motos disponíveis na loja"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Fotos de cada modelo com nome, cilindrada, consumo e preço de entrada. Visual limpo com identidade da marca. Serve como catálogo no feed.</p>
+        <div class="card-tags">
+          <span class="tag">catálogo</span>
+          <span class="tag">feed</span>
+          <span class="tag laranja">salva muito</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="content-card">
+      <div class="card-num">04</div>
+      <div class="card-header">
+        <div class="card-icon orange">🎙️</div>
+        <div>
+          <span class="card-type reels">Reels</span>
+          <div class="card-title">POV: "Você chegando na Avelloz e saindo de moto nova"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Roteiro de storytelling em primeira pessoa. Câmera segue o cliente (ator/funcionário) desde entrar na loja, escolher, fazer a simulação e sair pedalando. Muito compartilhável.</p>
+        <div class="card-tags">
+          <span class="tag">storytelling</span>
+          <span class="tag laranja">viral</span>
+          <span class="tag">engajamento</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="content-card">
+      <div class="card-num">05</div>
+      <div class="card-header">
+        <div class="card-icon blue">💬</div>
+        <div>
+          <span class="card-type reels">Reels</span>
+          <div class="card-title">"3 motivos pra não ficar sem moto em Queimadas"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Vídeo rápido (30s) com 3 tópicos: mobilidade no trabalho, economia vs carro, facilidade de financiamento. Quebra objeção e aquece o lead.</p>
+        <div class="card-tags">
+          <span class="tag">objeção</span>
+          <span class="tag">educativo</span>
+          <span class="tag laranja">aquecimento</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="content-card">
+      <div class="card-num">06</div>
+      <div class="card-header">
+        <div class="card-icon orange">🤝</div>
+        <div>
+          <span class="card-type stories">Stories</span>
+          <div class="card-title">Bastidores da inauguração — Antes e Depois da loja</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Stories documentando a montagem, organização das motos, equipe se preparando. Humaniza a marca e gera antecipação. Publicar nos dias 16 e 17/04.</p>
+        <div class="card-tags">
+          <span class="tag">bastidores</span>
+          <span class="tag">humanização</span>
+          <span class="tag laranja">antecipação</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="content-card">
+      <div class="card-num">07</div>
+      <div class="card-header">
+        <div class="card-icon blue">📊</div>
+        <div>
+          <span class="card-type feed">Feed</span>
+          <div class="card-title">Comparativo: "Moto 0km vs usada — o que vale mais a pena?"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Card comparativo visual mostrando garantia, condições de financiamento, segurança e custo. Posiciona a Avelloz como especialista e gera debate nos comentários.</p>
+        <div class="card-tags">
+          <span class="tag">educativo</span>
+          <span class="tag">autoridade</span>
+          <span class="tag laranja">comentários</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="content-card">
+      <div class="card-num">08</div>
+      <div class="card-header">
+        <div class="card-icon orange">🏆</div>
+        <div>
+          <span class="card-type trafego">Anúncio</span>
+          <div class="card-title">Depoimento do 1º cliente — "Comprei na Avelloz e recomendo"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Gravar o primeiro cliente comprando e pedir um depoimento espontâneo na hora. Publicar como Reels e usar como criativo de anúncio. Prova social fortíssima.</p>
+        <div class="card-tags">
+          <span class="tag">prova social</span>
+          <span class="tag laranja">conversão</span>
+          <span class="tag">UGC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="content-card">
+      <div class="card-num">09</div>
+      <div class="card-header">
+        <div class="card-icon blue">🔢</div>
+        <div>
+          <span class="card-type reels">Reels</span>
+          <div class="card-title">"Simulação ao vivo: quanto sai uma moto por mês?"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Vendedor faz simulação de financiamento na tela ao vivo, mostrando entrada e parcelas de um modelo. Direto, transparente e com CTA pro WhatsApp. Converte muito.</p>
+        <div class="card-tags">
+          <span class="tag laranja">alta conversão</span>
+          <span class="tag">financiamento</span>
+          <span class="tag">CTA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="content-card">
+      <div class="card-num">10</div>
+      <div class="card-header">
+        <div class="card-icon orange">❓</div>
+        <div>
+          <span class="card-type stories">Stories</span>
+          <div class="card-title">Quiz: "Qual moto combina com você?"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Stories interativos com enquetes: "Usa a moto pra trabalho ou lazer?" / "Prefere econômica ou potente?". Ao final, indicar o modelo ideal. Gera engajamento e dados de audiência.</p>
+        <div class="card-tags">
+          <span class="tag">interativo</span>
+          <span class="tag laranja">engajamento</span>
+          <span class="tag">qualificação</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="content-card">
+      <div class="card-num">11</div>
+      <div class="card-header">
+        <div class="card-icon blue">🌟</div>
+        <div>
+          <span class="card-type reels">Reels</span>
+          <div class="card-title">Apresentação do vendedor — "Quem vai te atender na Avelloz"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Cada vendedor grava um Reels rápido se apresentando, mostrando personalidade e criando conexão com o público. Humaniza a equipe e gera confiança antes da visita.</p>
+        <div class="card-tags">
+          <span class="tag">equipe</span>
+          <span class="tag">confiança</span>
+          <span class="tag laranja">conexão</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="content-card">
+      <div class="card-num">12</div>
+      <div class="card-header">
+        <div class="card-icon orange">📍</div>
+        <div>
+          <span class="card-type feed">Feed</span>
+          <div class="card-title">"Onde fica a Avelloz Queimadas?" — Post de localização</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Reels ou card com mapa, endereço completo, horários de funcionamento e como chegar. Usar pontos de referência da cidade. Essencial para buscas locais e SEO do Instagram.</p>
+        <div class="card-tags">
+          <span class="tag">local</span>
+          <span class="tag">SEO</span>
+          <span class="tag laranja">sempre útil</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="content-card">
+      <div class="card-num">13</div>
+      <div class="card-header">
+        <div class="card-icon blue">🔥</div>
+        <div>
+          <span class="card-type trafego">Anúncio</span>
+          <div class="card-title">"Oferta Especial de Inauguração" — Válida só pela semana</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Criar urgência com condição especial da semana de inauguração: isenção de taxa, brinde, acessório grátis ou entrada menor. Usar como criativo principal de tráfego pago.</p>
+        <div class="card-tags">
+          <span class="tag laranja">urgência</span>
+          <span class="tag">tráfego pago</span>
+          <span class="tag">oferta</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="content-card">
+      <div class="card-num">14</div>
+      <div class="card-header">
+        <div class="card-icon orange">🛵</div>
+        <div>
+          <span class="card-type reels">Reels</span>
+          <div class="card-title">"Moto para trabalho: quanto você economiza por mês?"</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Conteúdo educativo mostrando cálculo: gasto com Uber vs. parcela de moto. Apelo financeiro direto ao público trabalhador de Queimadas. Alta relevância regional.</p>
+        <div class="card-tags">
+          <span class="tag">educativo</span>
+          <span class="tag">trabalhador</span>
+          <span class="tag laranja">regional</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="content-card">
+      <div class="card-num">15</div>
+      <div class="card-header">
+        <div class="card-icon blue">🎯</div>
+        <div>
+          <span class="card-type reels">Reels</span>
+          <div class="card-title">"Tá esperando o quê? Vem pra Avelloz!" — CTA direto</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Vídeo curto e direto (15-20s) com o vendedor falando para a câmera, mostrando as motos atrás, e chamando pro WhatsApp com número na tela. Perfeito para remarketing.</p>
+        <div class="card-tags">
+          <span class="tag laranja">remarketing</span>
+          <span class="tag">CTA direto</span>
+          <span class="tag">WhatsApp</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  Planejamento elaborado por <strong>T3M</strong> para Avelloz Motos Queimadas · Inauguração 18/04/2026
+</div>
+
+</body>
+</html>
